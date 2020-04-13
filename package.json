@@ -1,0 +1,24 @@
+{
+  "name": "@ont-dev/hw-app-zil",
+  "version": "1.0.2",
+  "description": "Ledger Javascript API for Zilliqa.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liuqiang1357/hw-app-zil.git"
+  },
+  "keywords": [
+    "Ledger",
+    "Javascript",
+    "ZIL"
+  ],
+  "author": "liuqiang1357",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/liuqiang1357/hw-app-zil/issues"
+  },
+  "homepage": "https://github.com/liuqiang1357/hw-app-zil#readme"
+}
