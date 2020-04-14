@@ -94,10 +94,12 @@ class Zilliqa {
             });
     }
 
-    signTransaction(path, txnBytes) {
+    signTransaction(path, txnHex) {
         // https://github.com/Zilliqa/Zilliqa-JavaScript-Library/tree/dev/packages/zilliqa-js-account#interfaces
         const P1 = 0x00;
         const P2 = 0x00;
+
+        const txnBytes = Buffer.from(txnHex, 'hex');
 
         let indexBytes = Buffer.alloc(4);
         indexBytes.writeInt32LE(this.getKeyIndex(path));
@@ -155,14 +157,16 @@ class Zilliqa {
                 return response;
             })
             .then(result => {
-                return {signature: result.slice(0, SigByteLen)};
+                return {signature: result.slice(0, SigByteLen).toString('hex')};
             });
 
     }
 
-    signHash(path, hashBytes) {
+    signHash(path, hashHex) {
         const P1 = 0x00;
         const P2 = 0x00;
+
+        const hashBytes = Buffer.from(hashHex, 'hex');
 
         let indexBytes = Buffer.alloc(4);
         indexBytes.writeInt32LE(this.getKeyIndex(path));
@@ -179,7 +183,7 @@ class Zilliqa {
         return this.transport
             .send(CLA, INS.signHash, P1, P2, payload)
             .then(result => {
-                return {signature: result.slice(0, SigByteLen)}
+                return {signature: result.slice(0, SigByteLen).toString('hex')}
             });
     }
 
