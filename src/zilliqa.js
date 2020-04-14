@@ -1,4 +1,4 @@
-import { splitPath } from './util';
+const { splitPath } = require('./util');
 
 const CLA = 0xe0;
 const INS = {
@@ -22,7 +22,7 @@ const Bech32AddrLen = "zil".length + 1 + 32 + 6;
  * import Zil from "@ledgerhq/hw-app-zil";
  * const zil = new Zil(transport)
  */
-export default class Zilliqa {
+class Zilliqa {
 
     constructor(transport, scrambleKey = "w0w") {
         this.transport = transport;
@@ -191,3 +191,5 @@ export default class Zilliqa {
         return paths[4];
     }
 }
+
+module.exports = Zilliqa;
