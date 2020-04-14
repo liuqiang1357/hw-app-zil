@@ -14,7 +14,7 @@ async function test() {
   const address = await app.getPublicAddress(path);
   console.log(address);
 
-  const signature = (await app.signHash(path, hash)).signature;
+  const signature = await app.signHash(path, hash);
   console.log(signature);
 }
 

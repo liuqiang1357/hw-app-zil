@@ -157,7 +157,7 @@ class Zilliqa {
                 return response;
             })
             .then(result => {
-                return {signature: result.slice(0, SigByteLen).toString('hex')};
+                return result.slice(0, SigByteLen).toString('hex');
             });
 
     }
@@ -183,7 +183,7 @@ class Zilliqa {
         return this.transport
             .send(CLA, INS.signHash, P1, P2, payload)
             .then(result => {
-                return {signature: result.slice(0, SigByteLen).toString('hex')}
+                return result.slice(0, SigByteLen).toString('hex');
             });
     }
 
