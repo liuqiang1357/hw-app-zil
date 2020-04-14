@@ -1,8 +1,8 @@
 {
   "name": "@ont-dev/hw-app-zil",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Ledger Javascript API for Zilliqa.",
-  "main": "src/index.js",
+  "main": "src/zilliqa.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
