@@ -1,6 +1,6 @@
 {
   "name": "@ont-dev/hw-app-zil",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Ledger Javascript API for Zilliqa.",
   "main": "src/zilliqa.js",
   "scripts": {
