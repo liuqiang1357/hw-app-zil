@@ -160,14 +160,13 @@ export default class Zilliqa {
 
     }
 
-    signHash(path, hashStr) {
+    signHash(path, hashBytes) {
         const P1 = 0x00;
         const P2 = 0x00;
 
         let indexBytes = Buffer.alloc(4);
         indexBytes.writeInt32LE(this.getKeyIndex(path));
 
-        const hashBytes = Buffer.from(hashStr, "hex");
         let hashLen = hashBytes.length;
         if (hashLen <= 0) {
             throw Error(`Hash length ${hashLen} is invalid`);
