@@ -1,4 +1,4 @@
-exports.splitPath = function splitPath(path) {
+function splitPath(path) {
   let result = [];
   let components = path.split('/');
   components.forEach(element => {
@@ -12,4 +12,8 @@ exports.splitPath = function splitPath(path) {
     result.push(number);
   });
   return result;
+}
+
+module.exports = {
+  splitPath,
 }
