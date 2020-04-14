@@ -1,4 +1,4 @@
-import { splitPath } from './utils';
+import { splitPath } from './util';
 
 const CLA = 0xe0;
 const INS = {
