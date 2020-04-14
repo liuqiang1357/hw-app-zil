@@ -94,7 +94,7 @@ export default class Zilliqa {
             });
     }
 
-    signTxn(path, txnBytes) {
+    signTransaction(path, txnBytes) {
         // https://github.com/Zilliqa/Zilliqa-JavaScript-Library/tree/dev/packages/zilliqa-js-account#interfaces
         const P1 = 0x00;
         const P2 = 0x00;
@@ -155,7 +155,7 @@ export default class Zilliqa {
                 return response;
             })
             .then(result => {
-                return {sig: (result.toString('hex').slice(0, SigByteLen * 2))};
+                return {signature: result.slice(0, SigByteLen)};
             });
 
     }
@@ -178,15 +178,15 @@ export default class Zilliqa {
 
         return this.transport
             .send(CLA, INS.signHash, P1, P2, payload)
-            .then(response => {
-                return {sig: response.toString('hex').slice(0, SigByteLen * 2)}
+            .then(result => {
+                return {signature: result.slice(0, SigByteLen)}
             });
     }
 
     getKeyIndex(path) {
         const paths = splitPath(path);
-        if (paths.length < 5) {
-            throw Error(`Path must have 5 number parts`);
+        if (paths.length !== 5) {
+            throw Error(`Only path have 5 parts is supported`);
         }
         return paths[4];
     }
