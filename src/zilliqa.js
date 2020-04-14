@@ -3,9 +3,9 @@ const { splitPath } = require('./util');
 const CLA = 0xe0;
 const INS = {
     "getVersion": 0x01,
-    "getPublickKey": 0x02,
-    "getPublicAddress": 0x02,
-    "signTxn": 0x04,
+    "getPublicKey": 0x02,
+    "getAddress": 0x02,
+    "signTransaction": 0x04,
     "signHash": 0x08
 };
 
@@ -31,9 +31,9 @@ class Zilliqa {
             [
                 "getVersion",
                 "getPublicKey",
-                "getPublicAddress",
+                "getAddress",
+                "signTransaction",
                 "signHash",
-                "signTxn"
             ],
             scrambleKey
         );
@@ -65,7 +65,7 @@ class Zilliqa {
         payload.writeInt32LE(this.getKeyIndex(path));
 
         return this.transport
-            .send(CLA, INS.getPublickKey, P1, P2, payload)
+            .send(CLA, INS.getPublicKey, P1, P2, payload)
             .then(response => {
                 // The first PubKeyByteLen bytes are the public address.
                 const publicKey = response.toString("hex").slice(0, (PubKeyByteLen * 2));
@@ -73,7 +73,7 @@ class Zilliqa {
             });
     }
 
-    getPublicAddress(path) {
+    getAddress(path) {
         const P1 = 0x00;
         const P2 = 0x01;
 
@@ -81,7 +81,7 @@ class Zilliqa {
         payload.writeInt32LE(this.getKeyIndex(path));
 
         return this.transport
-            .send(CLA, INS.getPublicAddress, P1, P2, payload)
+            .send(CLA, INS.getAddress, P1, P2, payload)
             .then(response => {
                 // After the first PubKeyByteLen bytes, the remaining is the bech32 address string.
                 const pubAddr = response.slice(PubKeyByteLen, PubKeyByteLen + Bech32AddrLen).toString("utf-8");
@@ -128,7 +128,7 @@ class Zilliqa {
 
         let transport = this.transport;
         return transport
-            .send(CLA, INS.signTxn, P1, P2, payload)
+            .send(CLA, INS.signTransaction, P1, P2, payload)
             .then(function cb(response) {
                 // Keep streaming data into the device till we run out of it.
                 // See signTxn.c:istream_callback() for how this is used.
@@ -152,7 +152,7 @@ class Zilliqa {
                     const payload = Buffer.concat([hostBytesLeftBytes, txnNSizeBytes, txnNBytes]);
                     // Except for the payload, all others are ignored in the device.
                     // Only for the first send above will those paramters matter.
-                    return transport.send(CLA, INS.signTxn, P2, P2, payload).then(cb);
+                    return transport.send(CLA, INS.signTransaction, P2, P2, payload).then(cb);
                 }
                 return response;
             })

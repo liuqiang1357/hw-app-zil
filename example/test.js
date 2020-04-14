@@ -11,7 +11,7 @@ async function test() {
   const publicKey = await app.getPublicKey(path);
   console.log(publicKey);
 
-  const address = await app.getPublicAddress(path);
+  const address = await app.getAddress(path);
   console.log(address);
 
   const signature = await app.signHash(path, hash);

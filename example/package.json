@@ -12,7 +12,7 @@
     "@babel/polyfill": "^7.6.2",
     "@babel/register": "^7.6.2",
     "@ledgerhq/hw-transport-node-hid": "^5.13.0",
-    "@ont-dev/hw-app-zil": "^1.0.11"
+    "@ont-dev/hw-app-zil": "^1.0.12"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
