@@ -8,11 +8,8 @@ async function test() {
   const transport = await Transport.create();
   const app = new App(transport);
 
-  const publicKey = await app.getPublicKey(path);
-  console.log(publicKey);
-
-  const address = await app.getAddress(path);
-  console.log(address);
+  const { publicKey, address } = await app.getAddress(path);
+  console.log(publicKey, address);
 
   const signature = await app.signHash(path, hash);
   console.log(signature);

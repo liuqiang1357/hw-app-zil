@@ -68,7 +68,7 @@ class Zilliqa {
             .send(CLA, INS.getPublicKey, P1, P2, payload)
             .then(response => {
                 // The first PubKeyByteLen bytes are the public address.
-                const publicKey = response.toString("hex").slice(0, (PubKeyByteLen * 2));
+                const publicKey = response.slice(0, PubKeyByteLen).toString("hex");
                 return publicKey;
             });
     }
@@ -84,8 +84,9 @@ class Zilliqa {
             .send(CLA, INS.getAddress, P1, P2, payload)
             .then(response => {
                 // After the first PubKeyByteLen bytes, the remaining is the bech32 address string.
-                const pubAddr = response.slice(PubKeyByteLen, PubKeyByteLen + Bech32AddrLen).toString("utf-8");
-                return pubAddr;
+                const publicKey = response.slice(0, PubKeyByteLen).toString("hex");
+                const address = response.slice(PubKeyByteLen, PubKeyByteLen + Bech32AddrLen).toString();
+                return { publicKey, address };
             }).catch(error => {
                 if (error.statusCode === 26368) {
                     throw Error('Please check if Zilliqa App is open on Ledger.')
@@ -166,7 +167,7 @@ class Zilliqa {
         const P1 = 0x00;
         const P2 = 0x00;
 
-        const hashBytes = Buffer.from(hashHex, 'hex');
+        let hashBytes = Buffer.from(hashHex, 'hex');
 
         let indexBytes = Buffer.alloc(4);
         indexBytes.writeInt32LE(this.getKeyIndex(path));
@@ -176,7 +177,7 @@ class Zilliqa {
             throw Error(`Hash length ${hashLen} is invalid`);
         }
         if (hashLen > HashByteLen) {
-            hashBytes.slice(0, HashByteLen);
+            hashBytes = hashBytes.slice(0, HashByteLen);
         }
         const payload = Buffer.concat([indexBytes, hashBytes]);
 
@@ -190,14 +191,14 @@ class Zilliqa {
     getKeyIndex(path) {
         const paths = splitPath(path);
         if (paths.length !== 5 
-            || paths[0] !== (44 | 0x80000000)
-            || paths[1] !== (313 | 0x80000000)
-            || (paths[2] & 0x80000000) !== ~~0x80000000
-            || paths[3] !== ~~0x80000000 
-            || paths[4] !== ~~0x80000000) {
+            || paths[0] !== 44 + 0x80000000
+            || paths[1] !== 313 + 0x80000000
+            || paths[2] < 0x80000000
+            || paths[3] !== 0x80000000 
+            || paths[4] !== 0x80000000) {
             throw Error(`Path format should be: 44'/313'/n'/0'/0'`);
         }
-        return paths[2];
+        return paths[2] & ~0x80000000;
     }
 }
 

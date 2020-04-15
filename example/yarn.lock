@@ -856,10 +856,10 @@
   resolved "https://registry.yarnpkg.com/@ledgerhq/logs/-/logs-5.13.0.tgz#42e848f7c6f662387dfc5f3e86e3e5b4e07a5fae"
   integrity sha512-yMvzQiMjWDMRma3HPxQQibhvEqMaEdXXkNBk1+eaW+N47Y3neYSSyCJlyihzzMBeeoin4ChlP/5uKQaABwBeTg==
 
-"@ont-dev/hw-app-zil@^1.0.13":
-  version "1.0.13"
-  resolved "https://registry.yarnpkg.com/@ont-dev/hw-app-zil/-/hw-app-zil-1.0.13.tgz#ce212203b0a1c1d8093215f17b391bd1a80c9445"
-  integrity sha512-TcHMf2xdlTtyPROYb39iUEKXcBYjexYMvDSM6ujpOu0E4flxmg5Q4oNqi1mjTsLaNA6QhkOgcs7+0sdp7t/x+Q==
+"@ont-dev/hw-app-zil@^1.0.14":
+  version "1.0.14"
+  resolved "https://registry.yarnpkg.com/@ont-dev/hw-app-zil/-/hw-app-zil-1.0.14.tgz#7b659fda59ef0bd467c4542e1f027e6bb10c196b"
+  integrity sha512-2V81RDpNhq19EwHIQeMobXBWQ36nxQix2oaxsG9xTfzH26saIP+Bnoi55vR6Q9BUi0fE//gYcoiRmVPXf5PO5g==
 
 ansi-regex@^2.0.0:
   version "2.1.1"
