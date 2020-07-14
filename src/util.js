@@ -7,7 +7,7 @@ function splitPath(path) {
       throw Error(`Path ${path} is invalid.`);
     }
     if (element.length > 1 && element[element.length - 1] === "'") {
-      number += 0x80000000;
+      number |= 0x80000000;
     }
     result.push(number);
   });

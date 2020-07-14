@@ -191,14 +191,14 @@ class Zilliqa {
     getKeyIndex(path) {
         const paths = splitPath(path);
         if (paths.length !== 5 
-            || paths[0] !== 44 + 0x80000000
-            || paths[1] !== 313 + 0x80000000
-            || paths[2] < 0x80000000
-            || paths[3] !== 0x80000000 
-            || paths[4] !== 0x80000000) {
+            || paths[0] !== (44 | 0x80000000)
+            || paths[1] !== (313 | 0x80000000)
+            || (paths[2] & 0x80000000) !== (0x80000000 >> 0)
+            || paths[3] !== (0x80000000 >> 0)
+            || paths[4] !== (0x80000000 >> 0)) {
             throw Error("Path format should be: 44'/313'/n'/0'/0'");
         }
-        return paths[2] & 0x7fffffff;
+        return paths[2] & ~0x80000000;
     }
 }
 

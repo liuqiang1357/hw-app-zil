@@ -15,4 +15,4 @@ async function test() {
   console.log(signature);
 }
 
-test();
+test().catch(console.error);
